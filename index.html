@@ -1,1 +1,380 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>README.md</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0a0a0b;
+    --card: #121214;
+    --raised: #1a1b1e;
+    --ink: #e8e8ea;
+    --ink-soft: #8a8b90;
+    --line: #26272b;
+    --accent: #4a66a4;
+    --accent-soft: rgba(74,102,164,0.14);
+    --tag: #7c93c4;
+    --tag-soft: rgba(74,102,164,0.14);
+    --radius: 10px;
+  }
 
+  * { box-sizing: border-box; }
+
+  html, body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'IBM Plex Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  body {
+    min-height: 100vh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding: 48px 20px 80px;
+  }
+
+  .window {
+    width: 100%;
+    max-width: 760px;
+    background: var(--card);
+    border-radius: var(--radius);
+    border: 1px solid var(--line);
+    box-shadow: 0 1px 2px rgba(0,0,0,0.3), 0 20px 48px rgba(0,0,0,0.45);
+    overflow: hidden;
+    animation: rise 0.5s ease-out;
+  }
+
+  @keyframes rise {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .titlebar {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 12px 18px;
+    border-bottom: 1px solid var(--line);
+    background: linear-gradient(180deg, #17181b, #0e0e10);
+  }
+
+  .dots { display: flex; gap: 7px; }
+  .dot { width: 11px; height: 11px; border-radius: 50%; opacity: 0.85; }
+  .dot.r { background: #c96f68; }
+  .dot.y { background: #cfa059; }
+  .dot.g { background: #789e7d; }
+
+  .tab {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    color: var(--ink-soft);
+    background: var(--bg);
+    border: 1px solid var(--line);
+    border-bottom: none;
+    padding: 5px 12px;
+    border-radius: 6px 6px 0 0;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+
+  .tab::before {
+    content: '';
+    width: 7px; height: 7px;
+    border-radius: 2px;
+    background: var(--accent);
+    display: inline-block;
+  }
+
+  .content {
+    padding: 44px 48px 40px;
+  }
+
+  .eyebrow {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    letter-spacing: 0.06em;
+    color: var(--accent);
+    text-transform: uppercase;
+    margin: 0 0 10px;
+  }
+
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 600;
+    font-size: clamp(32px, 5vw, 44px);
+    line-height: 1.08;
+    margin: 0 0 8px;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+
+  .tagline {
+    font-size: 16px;
+    color: var(--ink-soft);
+    margin: 0 0 6px;
+    max-width: 52ch;
+  }
+
+  .cursor {
+    display: inline-block;
+    width: 8px;
+    height: 1.1em;
+    background: var(--accent);
+    vertical-align: text-bottom;
+    margin-left: 2px;
+    animation: blink 1.1s step-end infinite;
+  }
+
+  @keyframes blink { 50% { opacity: 0; } }
+
+  section {
+    margin-top: 40px;
+    padding-top: 4px;
+  }
+
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+
+  .section-head h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: 19px;
+    margin: 0;
+    color: var(--ink);
+  }
+
+  .section-head .hash {
+    font-family: 'IBM Plex Mono', monospace;
+    color: var(--accent);
+    font-size: 16px;
+  }
+
+  .rule {
+    flex: 1;
+    height: 1px;
+    background: var(--line);
+  }
+
+  .stack {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .pill {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12.5px;
+    padding: 6px 12px;
+    background: var(--tag-soft);
+    color: var(--tag);
+    border-radius: 6px;
+    border: 1px solid rgba(124,147,196,0.28);
+  }
+
+  .projects {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .project {
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 16px 18px;
+    background: var(--raised);
+    transition: border-color 0.15s ease, transform 0.15s ease;
+  }
+
+  .project:hover {
+    border-color: var(--accent);
+    transform: translateX(2px);
+  }
+
+  .project-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 5px;
+  }
+
+  .project-name {
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--ink);
+  }
+
+  .project-link {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 12px;
+    color: var(--accent);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+  .project-link:hover { text-decoration: underline; }
+
+  .project-desc {
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    line-height: 1.5;
+    margin: 0;
+  }
+
+  .links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px 22px;
+  }
+
+  .link-item {
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 13.5px;
+    color: var(--ink);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 0;
+    border-bottom: 1px solid transparent;
+  }
+
+  .link-item::before {
+    content: '→';
+    color: var(--accent);
+  }
+
+  .link-item:hover {
+    border-bottom-color: var(--accent);
+  }
+
+  footer {
+    margin-top: 44px;
+    padding-top: 20px;
+    border-top: 1px dashed var(--line);
+    font-family: 'IBM Plex Mono', monospace;
+    font-size: 11.5px;
+    color: var(--ink-soft);
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  @media (max-width: 520px) {
+    .content { padding: 32px 24px 32px; }
+    footer { flex-direction: column; }
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .window { animation: none; }
+    .cursor { animation: none; opacity: 1; }
+  }
+</style>
+</head>
+<body>
+
+<div class="window">
+  <div class="titlebar">
+    <div class="dots">
+      <span class="dot r"></span>
+      <span class="dot y"></span>
+      <span class="dot g"></span>
+    </div>
+    <div class="tab">README.md</div>
+  </div>
+
+  <div class="content">
+    <p class="eyebrow">whoami</p>
+
+    <h1>M00N<span class="cursor"></span></h1>
+
+    <p class="tagline">Messing around with C#, C++, and HTML lately, just trying to actually get good at this stuff.</p>
+
+    <section>
+      <div class="section-head">
+        <span class="hash">#</span>
+        <h2>stack</h2>
+        <div class="rule"></div>
+      </div>
+
+      <div class="stack">
+        <span class="pill">Python</span>
+        <span class="pill">HTML</span>
+        <span class="pill">C++</span>
+        <span class="pill">C#</span>
+        <span class="pill">BepInEx</span>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <span class="hash">#</span>
+        <h2>projects</h2>
+        <div class="rule"></div>
+      </div>
+      <div class="projects">
+
+        <div class="project">
+          <div class="project-top">
+            <span class="project-name">Prank Website</span>
+            <a class="project-link" href="https://real-m00n.github.io/supercoolwebsite/" target="_blank" rel="noopener">repo →</a>
+          </div>
+          <p class="project-desc">Made for educational purposes only.</p>
+        </div>
+        <div class="project">
+          <div class="project-top">
+            <span class="project-name">README.md</span>
+            <a class="project-link" href="https://github.com/real-m00n/website" target="_blank" rel="noopener">repo →</a>
+          </div>
+          <p class="project-desc">A README.md website that you are currently at.</p>
+        </div>
+        <div class="project">
+          <div class="project-top">
+            <span class="project-name">M00NMenu</span>
+            <a class="project-link" href="https://github.com/real-m00n/M00NMenu" target="_blank" rel="noopener">repo →</a>
+          </div>
+          <p class="project-desc">An Among Us cheat menu to make the game more fun.</p>
+        </div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <span class="hash">#</span>
+        <h2>find me</h2>
+        <div class="rule"></div>
+      </div>
+
+      <div class="links">
+        <a class="link-item" href="https://github.com/real-m00n" target="_blank" rel="noopener">github</a>
+        <a class="link-item" href="https://www.youtube.com/@really.m0on1" target="_blank" rel="noopener">YouTube</a>
+        <a class="link-item" href="https://haunt.gg/m00n" target="_blank" rel="noopener">haunt.gg</a>
+      </div>
+    </section>
+
+    <footer>
+      <span>last updated: 7/31/26</span>
+      <span>rendered from README.md</span>
+    </footer>
+  </div>
+</div>
+
+</body>
+</html>
